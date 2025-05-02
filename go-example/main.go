@@ -1,4 +1,4 @@
-package example
+package go_example
 
 import (
 	_ "golang.org/x/net/html"

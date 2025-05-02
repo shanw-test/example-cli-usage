@@ -3,19 +3,21 @@
 
 job:
   # this is the directory defined in dependabot-core for the ecosystem
-  package-manager: go_modules
+  package-manager: bundler
   allowed-updates:
     - dependency-type: direct
       update-type: all
-  experiments:
-    # unlike with hosted Dependabot, you can control this variable directly
-    goprivate: ""
   source:
     provider: github
     repo: dependabot/example-cli-usage
     # looks absolute, but this is relative to the root of the repo
-    directory: /go-example
+    directory: /bundler-example
     branch: main
+  dependency-groups:
+    - name: everything
+      rules:
+        - patterns:
+            - "*"
 # credentials are optional, but are used to authenticate with private repos and registries when provided
 credentials:
   - type: git_source

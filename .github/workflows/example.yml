@@ -29,6 +29,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./dependabot update -f .github/dependabot/go.yml --timeout 20m > result.jsonl || true
+          ./dependabot update -f .github/dependabot/bundler.yml --timeout 20m >> result.jsonl || true
 
       - name: Upload result
         uses: actions/upload-artifact@v4
