@@ -52,7 +52,7 @@ jq -c 'select(.type == "create_pull_request")' "$INPUT" | while read -r event; d
 
   # Commit and push
   git commit -m "$COMMIT_MSG"
-  git push origin "$BRANCH_NAME"
+  git push -f origin "$BRANCH_NAME"
 
   # Create PR using gh CLI
   gh pr create --title "$PR_TITLE" --body "$PR_BODY" --base main --head "$BRANCH_NAME" --label dependencies || true
