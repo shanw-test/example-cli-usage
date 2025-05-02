@@ -10,7 +10,8 @@ job:
   source:
     provider: github
     repo: dependabot/example-cli-usage
-    directory: "*/**"
+    directories:
+    - "*/**"
     branch: main
   dependency-groups:
     - name: everything
