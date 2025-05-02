@@ -16,8 +16,8 @@ job:
   dependency-groups:
     - name: everything
       rules:
-        - patterns:
-            - "*"
+        patterns:
+          - "*"
 # credentials are optional, but are used to authenticate with private repos and registries when provided
 credentials:
   - type: git_source
