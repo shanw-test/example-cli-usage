@@ -26,7 +26,7 @@ jq -c 'select(.type == "create_pull_request")' "$INPUT" | while read -r event; d
   PR_TITLE=$(echo "$event" | jq -r '.data."pr-title"')
   PR_BODY=$(echo "$event" | jq -r '.data."pr-body"')
   COMMIT_MSG=$(echo "$event" | jq -r '.data."commit-message"')
-  BRANCH_NAME="dependabot/$(echo "$PR_TITLE" | tr ' /' '__' | tr -cd '[:alnum:]_-')"
+  BRANCH_NAME="dependabot-$(echo -n "$COMMIT_MSG" | sha1sum | awk '{print $1}')"
 
   echo "Processing PR: $PR_TITLE"
   echo "  Base SHA: $BASE_SHA"
@@ -55,7 +55,7 @@ jq -c 'select(.type == "create_pull_request")' "$INPUT" | while read -r event; d
   git push origin "$BRANCH_NAME"
 
   # Create PR using gh CLI
-  gh pr create --title "$PR_TITLE" --body "$PR_BODY" --base main --head "$BRANCH_NAME" || true
+  gh pr create --title "$PR_TITLE" --body "$PR_BODY" --base main --head "$BRANCH_NAME" --label dependencies || true
 
   # Return to main branch for next PR
   git checkout main

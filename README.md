@@ -1,0 +1,23 @@
+# Example CLI Usage
+
+This repo serves as an example of how to use Dependabot CLI for updates. It is intended as a starting point for advanced users to run a self-hosted version of Dependabot within their own projects.
+
+If you're looking for a hassle-free Dependabot experience, check out the hosted [Dependabot Service](https://docs.github.com/en/github/administering-a-repository/about-dependabot-version-updates).
+
+This repo uses an Action which downloads and runs Dependabot CLI. To run the Action you would go to [the Action in the Actions tab](https://github.com/dependabot/example-cli-usage/actions/workflows/example.yml), and run it.
+
+To see what the results look like, go check out the Pull Requests.
+
+## Implementation details
+
+The Action is defined at [.github/workflows/example.yml](.github/workflows/example.yml).
+
+It contains two jobs, the first downloads and runs Dependabot CLI. The input for the Dependabot CLI job is [.github/dependabot/go.yml](.github/dependabot/go.yml). See the [Dependabot CLI repo](https://github.com/dependabot/cli) for more info on inputs such as credentials and groupings. 
+
+The results are redirected to a file and uploaded as artifacts.
+
+The second job downloads the artifact and creates PRs from it using the script [create.sh](create.sh).
+
+The reason there are two jobs is Dependabot CLI should only run with read-only tokens as some ecosystem may execute arbitrary code. To achieve that in Actions we must use two jobs with `permissions` defined differently.
+
+Also take a look at the [Dependabot Smoke Tests repo](https://github.com/dependabot/smoke-tests/tree/main/tests) for example inputs and expected outputs.
