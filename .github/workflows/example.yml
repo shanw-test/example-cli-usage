@@ -42,13 +42,11 @@ jobs:
       # This job creates PRs, so it needs write access.
       contents: write
       pull-requests: write
-      # Only needed if Dependabot is updating your workflows.
-      actions: write
     runs-on: ubuntu-latest
     needs: run-dependabot
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download result
         uses: actions/download-artifact@v4
