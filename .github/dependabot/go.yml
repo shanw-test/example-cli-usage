@@ -1,0 +1,18 @@
+# This is the input to Dependabot CLI.
+# For more examples of what you can do, see the smoke tests: https://github.com/dependabot/smoke-tests/tree/main/tests
+
+job:
+  # this is the directory defined in dependabot-core
+  package-manager: go_modules
+  allowed-updates:
+    - dependency-type: direct
+      update-type: all
+  experiments:
+    # unlike with hosted Dependabot, you can control this variable directly
+    goprivate: ""
+  source:
+    provider: github
+    repo: dependabot/example-cli-usage
+    # looks absolute, but this is relative to the root of the repo
+    directory: /example
+    branch: main
