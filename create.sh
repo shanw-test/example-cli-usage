@@ -18,10 +18,10 @@ INPUT="$1"
 # Parse each create_pull_request event
 jq -c 'select(.type == "create_pull_request")' "$INPUT" | while read -r event; do
   # Extract fields
-  BASE_SHA=$(echo "$event" | jq -r '.expect.data."base-commit-sha"')
-  PR_TITLE=$(echo "$event" | jq -r '.expect.data."pr-title"')
-  PR_BODY=$(echo "$event" | jq -r '.expect.data."pr-body"')
-  COMMIT_MSG=$(echo "$event" | jq -r '.expect.data."commit-message"')
+  BASE_SHA=$(echo "$event" | jq -r '.data."base-commit-sha"')
+  PR_TITLE=$(echo "$event" | jq -r '.data."pr-title"')
+  PR_BODY=$(echo "$event" | jq -r '.data."pr-body"')
+  COMMIT_MSG=$(echo "$event" | jq -r '.data."commit-message"')
   BRANCH_NAME="dependabot/$(echo "$PR_TITLE" | tr ' /' '__' | tr -cd '[:alnum:]_-')"
 
   echo "Processing PR: $PR_TITLE"
@@ -34,7 +34,7 @@ jq -c 'select(.type == "create_pull_request")' "$INPUT" | while read -r event; d
   git checkout -b "$BRANCH_NAME"
 
   # Apply file changes
-  echo "$event" | jq -c '.expect.data."updated-dependency-files"[]' | while read -r file; do
+  echo "$event" | jq -c '.data."updated-dependency-files"[]' | while read -r file; do
     FILE_PATH=$(echo "$file" | jq -r '.directory + "/" + .name' | sed 's#^/##')
     DELETED=$(echo "$file" | jq -r '.deleted')
     if [ "$DELETED" = "true" ]; then
