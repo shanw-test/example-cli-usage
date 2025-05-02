@@ -15,6 +15,10 @@ fi
 
 INPUT="$1"
 
+git config --global user.email "support@github.com"
+git config --global user.name "Dependabot Standalone"
+git config --global advice.detachedHead false
+
 # Parse each create_pull_request event
 jq -c 'select(.type == "create_pull_request")' "$INPUT" | while read -r event; do
   # Extract fields
