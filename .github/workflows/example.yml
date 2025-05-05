@@ -30,15 +30,12 @@ jobs:
         run: |
           # Run Dependabot CLI with options:
           # -f: the path to the job input
-          # --local: use the cloned repo as input to avoid cloning again
           # --timeout: the maximum time to wait for a job to finish
           ./dependabot update \
             -f .github/dependabot/go.yml \
-            --local . \
             --timeout 20m >> result.jsonl || true
           ./dependabot update \
             -f .github/dependabot/bundler.yml \
-            --local . \
             --timeout 20m >> result.jsonl || true
 
       - name: Upload result
