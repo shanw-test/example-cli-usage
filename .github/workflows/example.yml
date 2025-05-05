@@ -13,6 +13,9 @@ jobs:
         # Checkout code to get the Dependabot CLI input file
       - name: Checkout code
         uses: actions/checkout@v4
+        # Checkout to a directory to keep the working dir clean for the update.
+        with:
+          path: repo
 
       - name: Download CLI
         env:
@@ -30,12 +33,15 @@ jobs:
         run: |
           # Run Dependabot CLI with options:
           # -f: the path to the job input
+          # --local: use the locally checked out code instead of cloning each time
           # --timeout: the maximum time to wait for a job to finish
           ./dependabot update \
-            -f .github/dependabot/go.yml \
+            -f repo/.github/dependabot/go.yml \
+            --local repo \
             --timeout 20m >> result.jsonl || true
           ./dependabot update \
-            -f .github/dependabot/bundler.yml \
+            -f repo/.github/dependabot/bundler.yml \
+            --local repo \
             --timeout 20m >> result.jsonl || true
 
       - name: Upload result
