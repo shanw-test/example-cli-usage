@@ -21,3 +21,11 @@ The second job downloads the artifact and creates PRs from it using the script [
 The reason there are two jobs is Dependabot CLI should only run with read-only tokens as some ecosystem may execute arbitrary code. To achieve that in Actions we must use two jobs with `permissions` defined differently.
 
 Also take a look at the [Dependabot Smoke Tests repo](https://github.com/dependabot/smoke-tests/tree/main/tests) for example inputs and expected outputs.
+
+## Where can I go for help?
+
+If you are having issues with the updates to a specific ecosystem, head over to [dependabot-core](https://github.com/dependabot/dependabot-core).
+
+If there is a problem with running the Dependabot CLI, report that in the [CLI repo](https://github.com/dependabot/cli).
+
+We do not provide direct support for the scripts and workflows in this repo, this is only to serve as an example.
