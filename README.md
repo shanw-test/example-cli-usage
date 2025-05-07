@@ -12,7 +12,7 @@ To see what the results look like, go check out the Pull Requests.
 
 The Action is defined at [.github/workflows/example.yml](.github/workflows/example.yml).
 
-It contains two jobs, the first downloads and runs Dependabot CLI. The input for the first job is [.github/dependabot/go.yml](.github/dependabot/go.yml). See the [Dependabot CLI repo](https://github.com/dependabot/cli) for more info on inputs such as credentials and groupings. 
+It contains two jobs, the first downloads and runs Dependabot CLI. The inputs for the CLI runs are in [.github/dependabot](.github/dependabot). See the [Dependabot CLI repo](https://github.com/dependabot/cli) for more info on inputs such as credentials and groupings. 
 
 The results are redirected to a file and uploaded as artifacts.
 
