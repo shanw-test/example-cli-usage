@@ -1,4 +1,4 @@
-# Example CLI Usage
+# Example Dependabot CLI Usage
 
 This repo serves as an example of how to use Dependabot CLI for updates. It is intended as a starting point for advanced users to run a self-hosted version of Dependabot within their own projects.
 
