@@ -66,6 +66,19 @@ jobs:
         with:
           name: dependabot-result
 
+      - name: Create dependencies label
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh label list | grep -q "dependencies"; then
+            gh label create "dependencies" \
+              --color "#0366d6" \
+              --description "Pull requests that update a dependency file"
+            echo "'dependencies' label created"
+          else
+            echo "'dependencies' label already exists"
+          fi
+          
       - name: Create PRs
         env:
           # To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable.
